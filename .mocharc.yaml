@@ -1,0 +1,3 @@
+require:
+  - 'test/setupMocha.js'
+  - 'test/specHelper.js'
