@@ -1,7 +1,6 @@
 import { setupServer } from "msw/node";
 import { rest } from "msw";
 
-// export the server instance so you can `server.use` as needed
 export const server = setupServer(
   rest.post("http://localhost:8080/api/getList", (req, res, ctx) => {
     return res(
