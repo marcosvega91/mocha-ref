@@ -1,5 +1,6 @@
 require:
-  - "test/setupMocha.js"
+  - "test/registerModules.js"
   - "test/specHelper.js"
-  - "test/fixtures.js"
   - "test/extendExpect.js"
+file:
+  - "test/setupMocha.js"

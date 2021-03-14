@@ -1,10 +1,20 @@
-const path = require('path');
+const { cleanup } = require("@testing-library/react");
+const server = require("./setupServer");
 
-require('@babel/register')({
-  configFile: path.normalize(`${__dirname}/../babel.config.js`),
-  ignore: ['/node_modules'],
-});
-require('ignore-styles');
-require('isomorphic-fetch');
-require('localstorage-polyfill');
-require('jsdom-global/register');
+before(() => {
+  server.listen();
+  server.printHandlers(); // optional, but helpful!
+  console.log(`msw server started!`);
+})
+
+
+
+afterEach(() => {
+  server.resetHandlers();
+  cleanup();
+})
+
+after(() => {
+  server.close();
+})
+

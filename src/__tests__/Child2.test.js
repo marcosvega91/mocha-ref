@@ -1,7 +1,8 @@
 import React from "react";
-import { render, screen, waitFor, cleanup } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { rest } from "msw";
 import Child from "../Child";
+import mswServer from "../../test/setupServer";
 
 const mockedResult = {
   msgCode: 0,
@@ -14,10 +15,6 @@ const mockedResult = {
   },
 };
 
-afterEach(async () => {
-  cleanup();
-  mswServer.resetHandlers();
-});
 
 describe("Child2 tests", () => {
   it("renders Child2 without crashing and fetches", async () => {
