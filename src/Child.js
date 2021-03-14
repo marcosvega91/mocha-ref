@@ -1,34 +1,41 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from "react";
 
 function Child() {
+  const [fetched, setFetched] = useState(false);
+  const [result, setResult] = useState();
   useEffect(() => {
-    fetch('http://localhost:8080/api/getChildList', {
-      method: 'POST',
-      mode: 'cors',
-      cache: 'no-cache',
+    fetch("http://localhost:8080/api/getChildList", {
+      method: "POST",
+      mode: "cors",
+      cache: "no-cache",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         pagination: {
           pageSize: 10,
           pageNo: 0,
-          sortedColumn: 'createdBy',
-          sortedType: 'asc',
+          sortedColumn: "createdBy",
+          sortedType: "asc",
         },
       }),
     })
       .then(async (response) => {
-        console.log('Fetch complete: ', await response.json());
+        const result = await response.json();
+        console.log("Fetch complete: ", result);
+        setFetched(true);
+        setResult(result);
       })
       .catch((error) => {
-        console.error('Failed to fetch: ', error);
+        console.error("Failed to fetch: ", error);
       });
   }, []);
 
   return (
     <React.Fragment>
       <h1>Child</h1>
+      <div data-testid="fetched">{String(fetched)}</div>
+      <div data-testid="result">{JSON.stringify(result)}</div>
     </React.Fragment>
   );
 }

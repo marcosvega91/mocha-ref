@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack serve --mode=development",
     "prod": "webpack --mode=production",
+    "test": "cross-env NODE_ENV=test mocha --timeout 10000 src/**/*.test.js",
     "test:watch": "cross-env NODE_ENV=test mocha --timeout 10000 -w src/**/*.test.js"
   },
   "author": "",
